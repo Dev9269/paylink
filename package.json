@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "level1": "node level1/index.mjs",
+    "level1-web": "node level1-web/serve.mjs",
     "level2": "node level2/index.mjs",
     "level3": "node level3/server.mjs"
   },
