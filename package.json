@@ -1,0 +1,21 @@
+{
+  "name": "paylink",
+  "version": "0.1.0",
+  "description": "PayLink - Stellar payment links. Stellar Journey to Mastery submission.",
+  "type": "module",
+  "scripts": {
+    "level1": "node level1/index.mjs",
+    "level2": "node level2/index.mjs",
+    "level3": "node level3/server.mjs"
+  },
+  "dependencies": {
+    "@stellar/freighter-api": "^6.0.1",
+    "@stellar/stellar-sdk": "^16.2.0",
+    "express": "^5.2.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "puppeteer-core": "^25.8.0"
+  }
+}
