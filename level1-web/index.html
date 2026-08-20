@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PayLink — Stellar Wallet</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background: #0f172a; color: #e2e8f0; }
+  h1 { font-size: 22px; } .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 16px; margin: 12px 0; }
+  input, button { font-size: 15px; padding: 9px 12px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #e2e8f0; }
+  button { cursor: pointer; background: #0ea5e9; border: none; font-weight: 600; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .muted { color: #94a3b8; font-size: 13px; }
+  .ok { color: #4ade80; } .err { color: #f87171; }
+  .mono { font-family: monospace; font-size: 12px; word-break: break-all; }
+  a { color: #38bdf8; }
+  #balance { font-size: 26px; font-weight: 700; color: #38bdf8; }
+</style>
+</head>
+<body>
+<h1>PayLink <span class="muted">Stellar wallet</span></h1>
+<p class="muted">Connect your Freighter wallet (testnet) to check balances and send XLM.</p>
+
+<div class="card">
+  <div class="row">
+    <button id="connectBtn">Connect Freighter</button>
+    <button id="disconnectBtn" disabled>Disconnect</button>
+    <span id="connState" class="muted">not connected</span>
+  </div>
+  <p class="muted">Wallet <span id="pubkey" class="mono">—</span></p>
+  <p class="muted">Network <span id="network">—</span></p>
+</div>
+
+<div class="card">
+  <p class="muted">XLM balance</p>
+  <p id="balance">—</p>
+</div>
+
+<div class="card">
+  <div class="row">
+    <input id="dest" placeholder="Destination address (G...)" style="flex:1"/>
+    <input id="amount" type="number" step="0.01" min="0.01" placeholder="Amount (XLM)" style="width:130px"/>
+  </div>
+  <button id="sendBtn" disabled style="margin-top:10px">Send XLM</button>
+  <p id="txResult" class="muted">—</p>
+</div>
+
+<script src="./app.bundle.js"></script>
+<script src="./mock.bundle.js"></script>
+</body>
+</html>
