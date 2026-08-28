@@ -17,6 +17,33 @@ Built for the **Stellar Journey to Mastery: Monthly Builder Challenges**
 - **Level 3 — dApp** (`level3/`): Express backend + frontend merchant
   dashboard. Create payment links backed by on-chain escrow, QR codes for
   sharing, customer pay page, live payment feed from contract events.
+- **Web tool** (`web/`): a professional, dependency-minimal Vite single-page
+  tool. Connect a wallet, build an amount/asset payment link, share it by URL
+  or inline QR code, and watch inbound escrow payments stream in live. Ships a
+  dependency-free SVG QR renderer, an animated escrow flow GIF, and a
+  hand-tuned design system (semantic palette, optical heading tracking, capped
+  measures, custom easing) that deliberately avoids the "AI-vibe-coded" default
+  look.
+
+## Web tool
+
+The `web/` directory is a self-contained Vite application (vanilla JS + CSS,
+no UI framework).
+
+```bash
+cd web
+npm install
+npm run dev      # http://localhost:3100 (hot reload)
+npm run build    # production build into web/dist
+npm run preview  # serve the production build
+```
+
+From the repo root you can also run `npm run web`, `npm run web:build`, or
+`npm run web:preview`.
+
+The animated hero GIF is generated offline by `web/scripts/gen-gif.mjs`
+(`node web/scripts/gen-gif.mjs`) using a fixed 5-color palette from the design
+tokens, so it stays tiny (~3 KB) and matches the site colors exactly.
 
 ## Smart contract
 
