@@ -1,0 +1,12 @@
+﻿import puppeteer from "puppeteer-core";
+const browser = await puppeteer.connect({ browserURL: "http://127.0.0.1:9222", defaultViewport: null });
+const page = await browser.newPage();
+await page.setViewport({ width: 1280, height: 3000 });
+await page.goto("https://www.risein.com/dashboard", { waitUntil: "domcontentloaded", timeout: 60000 });
+await new Promise(r => setTimeout(r, 6000));
+const lines = await page.evaluate(() => (document.body.innerText || "").split("\n").map(l => l.trim()).filter(Boolean));
+const idx = lines.findIndex(l => /attention/i.test(l));
+console.log("--- DASHBOARD around 'attention' ---");
+console.log(lines.slice(Math.max(0, idx - 3), idx + 60).join("\n"));
+await page.close();
+process.exit(0);
