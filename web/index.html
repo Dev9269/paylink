@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="PayLink — create shareable Stellar payment links. Escrow-backed, QR-ready, live." />
+    <meta name="theme-color" content="#F1EBDF" />
+    <title>PayLink · Stellar payment links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,560;9..144,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to the tool</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="#top">PayLink<span class="dot">.</span></a>
+        <ul class="nav-links">
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#contract">Contract</a></li>
+          <li><a class="nav-cta" href="#workspace">Launch the tool</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Stellar · Testnet · Escrow</span>
+          <h1>Payment links, engineered like a tool.</h1>
+          <p class="lede">
+            Create a shareable Stellar link backed by a Soroban escrow contract.
+            Set the amount, share by URL or QR, and watch funds settle into escrow — live.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#workspace">Create a payment link</a>
+            <a class="btn btn-dark" href="#contract">Read the contract</a>
+          </div>
+          <p class="ease-note">cubic-bezier(0.22,1,0.36,1) · 66ch measure · optical tracking</p>
+        </div>
+        <aside class="hero-visual reveal" aria-hidden="true">
+          <div class="live"><span class="pulse"></span> streaming</div>
+          <div class="panel" style="margin-top:12px">
+            <svg width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Stylized QR">
+              <rect width="220" height="220" fill="#FBF8F1" />
+              <g fill="#241D14">
+                <rect x="20" y="20" width="60" height="60" />
+                <rect x="20" y="140" width="60" height="60" />
+                <rect x="140" y="20" width="60" height="60" />
+                <rect x="28" y="28" width="44" height="44" fill="#FBF8F1" />
+                <rect x="28" y="148" width="44" height="44" fill="#FBF8F1" />
+                <rect x="148" y="28" width="44" height="44" fill="#FBF8F1" />
+                <rect x="148" y="148" width="20" height="20" />
+                <rect x="94" y="94" width="20" height="20" />
+                <rect x="118" y="94" width="20" height="20" />
+                <rect x="94" y="118" width="20" height="20" />
+                <rect x="70" y="70" width="20" height="20" />
+                <rect x="118" y="118" width="20" height="20" />
+                <rect x="150" y="150" width="20" height="20" />
+              </g>
+            </svg>
+            <p style="text-align:center;margin:10px 0 0;font-family:var(--font-mono);font-size:.76rem;color:var(--muted)">
+              escrow flow · animated
+            </p>
+            <img width="180" height="112" src="./paylink-flow.gif" alt="Animated PayLink escrow flow" style="margin:14px auto 0" />
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="workspace" tabindex="-1">
+        <div class="section-head reveal">
+          <h2 id="tool">The tool</h2>
+          <p>Connect a wallet, pick an amount, generate a link. No ghost buttons — every control does something.</p>
+        </div>
+
+        <div class="workspace">
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Build a link</h3>
+              <span class="tag">create</span>
+            </div>
+
+            <span class="wallet-chip idle" id="walletChip">
+              <span class="status-dot"></span>
+              <span id="pubkey">not connected</span>
+            </span>
+            <div style="margin:14px 0">
+              <button class="btn btn-small btn-primary" id="connectBtn">Connect wallet</button>
+            </div>
+
+            <ol class="steps">
+              <li>
+                <div class="field">
+                  <label for="amount">Amount</label>
+                  <div class="field row">
+                    <input class="input" id="amount" type="number" min="0" step="0.01" inputmode="decimal" value="25" aria-describedby="amount-hint" />
+                    <div class="asset-picker" role="group" aria-label="Asset">
+                      <button class="asset-btn" data-asset="XLM" aria-pressed="true">XLM</button>
+                      <button class="asset-btn" data-asset="USDC" aria-pressed="false">USDC</button>
+                    </div>
+                  </div>
+                  <p class="amount-display" id="amountDisplay" aria-live="polite"></p>
+                  <div class="hint" id="amount-hint">Backed by a Soroban escrow contract; released to you on claim.</div>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <strong>Generate</strong><br />
+                  A unique shareable link + QR are created with the amount and asset above.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <strong>Share &amp; watch</strong><br />
+                  Payer settles into escrow; the live feed streams Funded / Claimed events.
+                </p>
+              </li>
+            </ol>
+
+            <button class="btn btn-primary" id="buildBtn">Generate payment link</button>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Share &amp; stream</h3>
+              <span class="tag">output</span>
+            </div>
+
+            <div class="generated" id="generated" hidden>
+              <div id="qr" style="display:grid;place-items:center"></div>
+
+              <div class="field">
+                <label for="linkField">Payment link</label>
+                <div class="link-box">
+                  <input class="input" id="linkField" readonly />
+                  <button class="copy-hit" id="copyBtn">Copy</button>
+                </div>
+              </div>
+
+              <div class="panel-title">
+                <h3 style="font-size:1.05rem">Inbound</h3>
+                <span style="display:flex;gap:10px;align-items:center">
+                  <button class="btn btn-ghost btn-small" id="simulateBtn">+ demo payment</button>
+                </span>
+              </div>
+              <ul class="feed" id="feed" aria-live="polite"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="section-head reveal">
+          <h2>How it works</h2>
+          <p>A three-step escrow flow, on-chain.</p>
+        </div>
+        <ul class="feats">
+          <li class="reveal">
+            <span class="glyph" aria-hidden="true">1</span>
+            <h3>Create</h3>
+            <p>Merchant calls <code>create(link_id, payee, asset, amount)</code> and gets a shareable link.</p>
+          </li>
+          <li class="reveal">
+            <span class="glyph" aria-hidden="true">2</span>
+            <h3>Fund</h3>
+            <p>Payer opens the link and calls <code>fund(link_id, payer)</code>, locking funds into escrow.</p>
+          </li>
+          <li class="reveal">
+            <span class="glyph" aria-hidden="true">3</span>
+            <h3>Claim</h3>
+            <p>Merchant calls <code>claim(link_id)</code> to release funds; Funded / Claimed events stream live.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="contract">
+        <div class="section-head reveal">
+          <h2>The contract</h2>
+          <p>Written in Rust with soroban-sdk 27. Deployed on Stellar testnet.</p>
+        </div>
+        <pre class="snippet reveal" tabindex="0"><code><span class="c">// escrow: create → fund → claim  (events: Funded, Claimed)</span>
+<span class="k">create</span>(link_id, payee, asset, amount) <span class="c">// merchant</span>
+<span class="k">fund</span>(link_id, payer)                  <span class="c">// customer locks funds</span>
+<span class="k">claim</span>(link_id, payee)                 <span class="c">// merchant releases</span>
+
+<span class="k">env.events().publish</span>((Funded,  payer, amount));  <span class="c">// streamed live</span>
+<span class="k">env.events().publish</span>((Claimed, payee, amount));  <span class="c">// streamed live</span></code></pre>
+        <p class="u-measure" style="margin-top:16px">
+          Contract on testnet:
+          <code>CAUAHW4XE2F7VMWTOIUBHV43CQAVD6SR7CFD2UCHTHW5U7ZJSLJETOMN</code>
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <a class="brand" href="#top">PayLink<span class="dot">.</span></a>
+          <p style="margin-top:12px">Stellar payment links, escrow-backed. Built for the Stellar Journey to Mastery builder program.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#contract">Contract</a></li>
+            <li><a href="#workspace">Launch the tool</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <ul>
+            <li><a href="https://github.com/Dev9269/paylink">Source on GitHub</a></li>
+            <li><a href="https://stellar.expert/explorer/testnet/contract/CAUAHW4XE2F7VMWTOIUBHV43CQAVD6SR7CFD2UCHTHW5U7ZJSLJETOMN">Contract explorer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">PayLink · testnet demo · not for production use</div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>

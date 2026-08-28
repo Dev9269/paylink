@@ -1,0 +1,66 @@
+:root {
+  /* ---- 60-30-10 semantic palette (warm editorial fintech, no AI-slop) ---- */
+  /* 60% base */
+  --bg: #F1EBDF;
+  --bg-sunken: #E9E1D2;
+  --surface: #FBF8F1;
+  --surface-raised: #FFFDF8;
+  /* 30% ink & text */
+  --ink: #241D14;
+  --ink-soft: #4A4033;
+  --muted: #7A6E5B;
+  --faint: #A99C86;
+  /* 10% accent — copper/rust (never indigo/blue/purple) */
+  --accent: #B0531D;
+  --accent-strong: #8F3F12;
+  --accent-soft: #E9CFB4;
+  --accent-tint: #F7E8D6;
+  /* secondary — deep forest olive, used rarely */
+  --forest: #3E4A33;
+  --forest-soft: #DCE3D3;
+  /* success / danger (semantic, not AI-candy) */
+  --good: #3E6B4C;
+  --good-tint: #E4EDE2;
+  --bad: #A13A2C;
+  --bad-tint: #F5E2DC;
+
+  /* ---- typography ---- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Trebuchet MS", Verdana, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+  --base-size: 17px;
+  --measure: 66ch;
+
+  /* ---- rhythm & shape ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 14px;
+  --space-4: 22px;
+  --space-5: 36px;
+  --space-6: 58px;
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+
+  /* ---- motion (springy, organic — not snapping) ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-med: 260ms;
+  --dur-slow: 480ms;
+
+  /* ---- borders / hairlines (editorial, minimal) ---- */
+  --hairline: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  --hairline-strong: 1px solid color-mix(in srgb, var(--ink) 26%, transparent);
+
+  /* ---- elevation: soft ambient, no hard shadow stacks ---- */
+  --shadow-1: 0 1px 2px rgba(36, 29, 20, 0.08);
+  --shadow-2: 0 6px 24px -8px rgba(36, 29, 20, 0.28);
+
+  --focus-ring: 0 0 0 3px var(--accent-tint), 0 0 0 1.5px var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

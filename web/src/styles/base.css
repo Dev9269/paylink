@@ -1,0 +1,92 @@
+/* Reset & base — semantic, accessible, professional */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  accent-color: var(--accent);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--base-size);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 560;
+  line-height: 1.08;
+  color: var(--ink);
+  margin: 0;
+  /* optical sizing: tightened tracking on display sizes (not the AI default 0) */
+  letter-spacing: -0.012em;
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -0.014em; }
+h3 { font-size: 1.25rem; letter-spacing: -0.008em; }
+
+p {
+  max-width: var(--measure);
+  line-height: 1.62;
+}
+
+a {
+  color: var(--accent-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--ink); }
+
+/* custom focus rings — tuned to brand, replacing default blue ring */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: none;
+  border-radius: var(--radius-s);
+  box-shadow: var(--focus-ring);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+}
+
+img { max-width: 100%; display: block; }
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* util: capped reading measure */
+.u-measure { max-width: var(--measure); }
+
+/* util: skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--surface);
+  padding: 10px 16px;
+  border-radius: 0 0 var(--radius-s) 0;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0;
+  box-shadow: none;
+  color: #fff;
+}
